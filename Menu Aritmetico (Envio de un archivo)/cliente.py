@@ -17,7 +17,7 @@ def menu():
   print "     2. FACTORIAL"
   print "     3. SERIE DE FIBONACCI"
   print "     4. LLENAR LISTA/TUPLA"
-  print "     0. PARA SALIR"
+  print "     0. PARA SALIR" 
 
 def conectar():
   menu()
