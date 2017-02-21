@@ -40,22 +40,31 @@ def conectar():
 
   elif a == 4:
     os.system('clear')
-    li = raw_input("Ingrese los numeros de la lista: ")
-    li = li.rstrip() 
+    c = input("Ingrese la cantidad de elementos de la lista: ")
+    li=[]
+    for i in range(c):
+            v=int(raw_input("Ingrese el elemento de la lista "+str(i+1)+": "))
+            li.append(v)
+            #li = li.rstrip()
+    
     nom_arch = crear_archivo(li) 
     print "Archivo creado con el nombre: "+nom_arch
     time.sleep( 3 )
+    
+
+    # Envia el archivo de texto al servidor
+    with open("Respuesta_servidor_"+nom_arch, "wb") as handle:
+                    handle.write(proxy.receive_data(nom_arch).data)
+
     print "Enviando archivo al servidor..."
     time.sleep( 3 )
     print "Archivo generado por el servidor.\n"
     time.sleep( 1 )
-    print "El factorial de cada elemento de tu lista es: "+str(proxy.get_file(nom_arch))
+    print "El factorial de cada elemento de tu lista es: "+str(proxy.calcular_datos("Respuesta_servidor_"+nom_arch))
 
-    
-    
-    # Envia el archivo de texto al servidor
-    with open("Enviando_"+nom_arch, "wb") as handle:
-                    handle.write(proxy.receive_data(nom_arch).data)
+
+
+
                     
   elif a == 0:
       print "Para el servidor y todo el equipo fue un placer atenderle, regresa pronto a nuestro MENU"

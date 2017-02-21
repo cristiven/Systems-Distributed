@@ -9,13 +9,15 @@ def factorial(n):
 			return factorial(n-1)*n
 		    
 def crear_archivo(dato):
-	archivo = "Respuesta_Servidor.txt"
+	archivo = "Respuesta_servidor_Datos_lista.txt"
 	arch = open(archivo,'w+') 
 	for a in dato:
 		arch.write(str(a)+"\n")
 	
 	arch.close()
 	return archivo
+
+
 
 class Operaciones:
     def potencia(self,x,y):
@@ -42,18 +44,19 @@ class Operaciones:
         with open(nom_arch, "rb") as handle:
             return xmlrpclib.Binary(handle.read())
 
-    def get_file(self,nom_arch):
+    def calcular_datos(self,nom_arch):
         file = open(nom_arch,'r')
         li = []
         for num in file:
-			f=factorial(int(num))
-			li.append(f)		
-	file.close
-	crear_archivo(li)
-	return li
-		
-        
-
+                f=factorial(int(num))
+                li.append(f)
+        file.close
+        crear_archivo(li)
+        return li
+    
+    #def llamado_calcular(self):
+        #r=calcular_datos("Respuesta_servidor_Datos_lista.txt")
+        #return r
 
 conexion = Server(("localhost", 8000))
 print "###################servidor ONLINE #####################################"
