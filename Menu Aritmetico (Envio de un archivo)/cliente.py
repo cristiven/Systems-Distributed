@@ -33,7 +33,7 @@ def conectar():
     n=input("ingrese un entero: ")
     print "el factorial de : "+str(n)+str(" es: ")+str(proxy.factorial(n))
 
-  elif a == 3:
+  elif a == 3: 
     os.system('clear')
     n = input("ingrese un entero: ")
     print "el numero de fibonacci es: "+str(proxy.fibonacci(n))
@@ -49,18 +49,21 @@ def conectar():
     
     nom_arch = crear_archivo(li) 
     print "Archivo creado con el nombre: "+nom_arch
-    time.sleep( 3 )
+    #time.sleep( 3 )
     
 
     # Envia el archivo de texto al servidor
-    with open("Respuesta_servidor_"+nom_arch, "wb") as handle:
-                    handle.write(proxy.receive_data(nom_arch).data)
+    #with open("Respuesta_servidor_"+nom_arch, "wb") as handle:
+                    #handle.write(proxy.receive_data(nom_arch).data)
+    with open("C:\Users\Cristian\Google Drive\CS ni\Systems Distributed\Workshops\Menu Aritmetico (envio de un archivo)\Test Dos PCs\Datos_lista.txt", "rb") as handle:
+            binary_data = xmlrpclib.Binary(handle.read())
+    proxy.server_receive_file(binary_data)
 
     print "Enviando archivo al servidor..."
-    time.sleep( 3 )
+    #time.sleep( 3 )
     print "Archivo generado por el servidor.\n"
-    time.sleep( 1 )
-    print "El factorial de cada elemento de tu lista es: "+str(proxy.calcular_datos("Respuesta_servidor_"+nom_arch))
+    #time.sleep( 1 )
+    print "El factorial de cada elemento de la lista es: "+str(proxy.calcular_datos("Datos_Recibidos_Cliente.txt"))
 
 
 
@@ -71,5 +74,5 @@ def conectar():
       exit()
 
 
-proxy = xmlrpclib.ServerProxy('http://localhost:8000/')
+proxy = xmlrpclib.ServerProxy('http://192.168.9.82:8000/')
 conectar()

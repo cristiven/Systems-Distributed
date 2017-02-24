@@ -40,9 +40,13 @@ class Operaciones:
             return self.fibonacci(n-1)+self.fibonacci(n-2)
 
     # Recibe el archivo de texto del cliente
-    def receive_data(self,nom_arch):
-        with open(nom_arch, "rb") as handle:
-            return xmlrpclib.Binary(handle.read())
+    #def receive_data(self,nom_arch):
+        #with open(nom_arch, "rb") as handle:
+            #return xmlrpclib.Binary(handle.read())
+    def server_receive_file(self,arg):
+        with open("C:\Users\Estudiantes\Downloads\Funcionando localhost\Datos_Recibidos_Cliente.txt", "wb") as handle:
+            handle.write(arg.data)
+            return True
 
     def calcular_datos(self,nom_arch):
         file = open(nom_arch,'r')
@@ -58,7 +62,7 @@ class Operaciones:
         #r=calcular_datos("Respuesta_servidor_Datos_lista.txt")
         #return r
 
-conexion = Server(("localhost", 8000))
+conexion = Server(("192.168.9.82", 8000))
 print "###################servidor ONLINE #####################################"
 print "Soy el servidor y estoy escuchando por el puerto:" + str(8000)
 conexion.register_instance(Operaciones())
